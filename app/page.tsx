@@ -6,7 +6,7 @@ export default function Home() {
         <div className="flex flex-col max-w-[1000px] mx-auto w-full ">
             <section className="min-h-screen flex flex-col">
                 <Header />
-                <Homepage />
+                {(<Homepage />)}
             </section>
             <h1 className="text-green-500">Free Scribe</h1>
             <footer></footer>

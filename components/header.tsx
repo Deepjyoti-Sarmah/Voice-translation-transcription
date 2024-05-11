@@ -9,7 +9,7 @@ const Header = () => {
             </h1>
             <Button 
                 variant="outline" 
-                className="flex items-center gap-2 px-4 py-2 rounded-lg specialBtn ">
+                className="flex text-black items-center gap-2 px-4 py-2 rounded-lg specialBtn ">
                 <p>New</p>
                 <PlusSVG />
             </Button>
