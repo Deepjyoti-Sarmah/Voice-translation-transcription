@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Button } from './ui/button'
 
 interface HomepageProps {
-    setAudioStream: (stream: Blob) => void;
-    setFile: (file: File | undefined) => void;
+    setAudioStream: (stream: Blob | null) => void;
+    setFile: (file: File | null) => void;
 }
 
 const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
@@ -93,7 +93,7 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
                 <p>{recordingStatus === "inactive"? "Record" : "Stop Recording"}</p>
                 <div className='flex items-center gap-2'>
                     {duration !== 0 && (
-                        <p className='text-sm'>{duration}</p>
+                        <p className='text-sm'>{duration}s</p>
                     )}
                     <RecordSVG />
                 </div>
@@ -105,8 +105,10 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
                         type='file'
                         // accept='.mp3,.wave'
                         onChange={(e) => {
-                            const tempFile = e.target.files?.[0]
-                            setFile(tempFile);
+                            if (e.target.files) {
+                                const tempFile = e.target.files[0]
+                                setFile(tempFile);
+                            }
                         }}
                     />
                 </label> a mp3 file

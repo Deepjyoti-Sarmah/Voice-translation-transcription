@@ -6,8 +6,8 @@ import React from "react";
 
 export default function Home() {
 
-    const [file, setFile] = React.useState(null);
-    const [audioStream, setAudioStream] = React.useState(null);
+    const [file, setFile] = React.useState<File | null>(null);
+    const [audioStream, setAudioStream] = React.useState<Blob | null>(null);
 
     const isAudioAvailable = file || audioStream;
 
