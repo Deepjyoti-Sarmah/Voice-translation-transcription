@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button } from './ui/button'
 
 interface HomepageProps {
@@ -8,7 +8,7 @@ interface HomepageProps {
 
 const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
 
-    const [recordingState, setRecordingStatus] = useState<"inactive" | "recording">("inactive");
+    const [recordingStatus, setRecordingStatus] = useState<"inactive" | "recording">("inactive");
     const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
     const [duration, setDuration] = useState<number>(0);
 
@@ -57,9 +57,20 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
                 const audioBlob = new Blob(audioChunks, { type: mimeType });
                 setAudioStream(audioBlob);
                 setAudioChunks([]);
+                setDuration(0);
             }
         }
     };
+
+    useEffect(() => {
+        if (recordingStatus === "inactive") return;
+
+        const interval = setInterval(() => {
+            setDuration(curr => curr + 1);
+        }, 1000);
+
+        return () => clearInterval(interval);
+    })
 
     return (
         <main
@@ -76,9 +87,16 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
             </h3>
             <Button
                 variant="outline"
-                className='flex text-black items-center text-base justify-between gap-4 mx-auto w-72 max-w-full my-4 specialBtn px-4 py-2 rounded-xl hover:text-blue-600 duration-200'>
-                <p>Record</p>
-                <RecordSVG />
+                className='flex text-black items-center text-base justify-between gap-4 mx-auto w-72 max-w-full my-4 specialBtn px-4 py-2 rounded-xl hover:text-blue-600 duration-200'
+                onClick={recordingStatus === "inactive" ? startRecording : stopRecording}
+            >
+                <p>{recordingStatus === "inactive"? "Record" : "Stop Recording"}</p>
+                <div className='flex items-center gap-2'>
+                    {duration !== 0 && (
+                        <p className='text-sm'>{duration}</p>
+                    )}
+                    <RecordSVG />
+                </div>
             </Button>
             <p className='text-base'>Or
                 <label className='text-blue-500 cursor-pointer hover:text-blue-700 duration-200'> upload

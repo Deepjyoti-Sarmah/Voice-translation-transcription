@@ -2,9 +2,6 @@ import React, { useRef, useState } from 'react'
 import { Button } from './ui/button'
 
 const FileDisplay = ({file, audioStream, handleAudioReset}:any) => {
-
-
-
     return (
         <main 
             className="flex-1 p-4 flex flex-col gap-3 sm:gap-4 md:gap-5 justify-center text-center pb-10 w-fit max-w-full mx-auto ">
