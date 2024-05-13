@@ -5,18 +5,18 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Voice Translation Transcription",
-  description: "Translates and Transcripts the voice",
+    title: "Voice Translation Transcription",
+    description: "Translates and Transcripts the voice",
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body className={`${inter.className} `}>{children}</body>
-    </html>
-  );
+        children: React.ReactNode;
+    }>) {
+    return (
+        <html lang="en">
+            <body className={`${inter.className} `}>{children}</body>
+        </html>
+    );
 }
