@@ -77,7 +77,7 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
             className="flex-1 p-4 flex flex-col gap-3 sm:gap-4 md:gap-5 justify-center text-center pb-10"
         >
             <h1 className='font-semibold text-5xl sm:text-6xl md:text-7xl'> Free
-                <span className='text-blue-500 '>
+                <span className='text-blue-500 bold'>
                     Scribe
                 </span>
             </h1>

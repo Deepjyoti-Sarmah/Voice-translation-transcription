@@ -10,7 +10,7 @@ export default function Home() {
 
     const [file, setFile] = React.useState<File | null>(null);
     const [audioStream, setAudioStream] = React.useState<Blob | null>(null);
-    const [output, setOutput] = React.useState(null);
+    const [output, setOutput] = React.useState(true);
     const [loading, setLoading] = React.useState(true);
 
     const isAudioAvailable = file || audioStream;
