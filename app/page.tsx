@@ -2,7 +2,7 @@
 import FileDisplay from "@/components/fileDisplay";
 import Header from "@/components/header";
 import Homepage from "@/components/homepage";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function Home() {
 
@@ -15,6 +15,10 @@ export default function Home() {
         setFile(null);
         setAudioStream(null);
     }
+
+    useEffect(() => {
+        console.log("audioStream",audioStream);
+    }, [audioStream]);
 
     return (
         <div className="flex flex-col max-w-[1000px] mx-auto w-full ">
