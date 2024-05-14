@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Button } from './ui/button'
+import Transcription from './transcription';
+import Translation from './translation';
 
 const Information = () => {
 
@@ -22,8 +24,12 @@ const Information = () => {
                     className={'px-4 rounded duration-200 py-1  ' + (tab === 'translation' ? ' bg-blue-400 text-white' : ' text-blue-500 hover:text-blue-600')}
                     onClick={() => setTab("translation")}
                 >Translation</Button>
-
             </div>
+            {tab === "transcription" ? (
+                <Transcription / >
+            ): (
+                    <Translation />
+                )}
         </main>
     )
 }

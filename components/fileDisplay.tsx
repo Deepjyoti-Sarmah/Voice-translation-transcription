@@ -5,9 +5,10 @@ interface FileDisplayProps {
     file: File | null;
     audioStream: Blob | null;
     handleAudioReset: () => void;
+    handleFormSubmission: () => void;
 }
 
-const FileDisplay = ({file, audioStream, handleAudioReset}: FileDisplayProps) => {
+const FileDisplay = ({handleFormSubmission, file, audioStream, handleAudioReset}: FileDisplayProps) => {
     return (
         <main 
             className="flex-1 p-4 flex flex-col gap-3 sm:gap-4 md:gap-5 justify-center text-center pb-10 w-72 sm:w-96 max-w-full mx-auto ">
