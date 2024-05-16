@@ -5,7 +5,6 @@ import Homepage from "@/components/homepage";
 import Information from "@/components/information";
 import Transcribing from "@/components/transcribing";
 import { MessageTypes } from "@/utils/presets";
-import { type } from "os";
 import React, { useEffect, useRef, useState } from "react";
 
 export default function Home() {
@@ -28,16 +27,21 @@ export default function Home() {
     //     console.log("audioStream",audioStream);
     // }, [audioStream]);
     //
-    const worker = useRef(null);
+    const worker = useRef<Worker | null>(null);
     
     useEffect(() => {
+        let workerInstance: Worker | null = null;
+
         if (!worker.current) {
             worker.current = new Worker(new URL("../utils/wisper.worker.ts", import.meta.url), {
                 type: "module"
-            })
+            });
+            worker.current = workerInstance;
+        }else {
+            workerInstance = worker.current;
         }
 
-        const onMessageReceived = async (e) => {
+        const onMessageReceived = async (e: any) => {
             switch (e.data.type) {
                 case "DOWNLOADING":
                     setDownloading(true);
@@ -56,8 +60,16 @@ export default function Home() {
                     break;
             }
         }
-        worker.current.addEventListener("message", onMessageReceived);
-        return () => worker.current.removeEventListener("message", onMessageReceived);
+
+        if (workerInstance) {
+            workerInstance.addEventListener("message", onMessageReceived);
+        }
+
+        return () =>{ 
+            if (workerInstance) {
+                workerInstance.removeEventListener("message", onMessageReceived); 
+            }
+        };
     },[]);
 
     async function readAudioFrom(file:Blob) {
@@ -72,10 +84,10 @@ export default function Home() {
     async function handleFormSubmission() {
         if (!file && !audioStream) return;
 
-        let audio = await readAudioFrom(file ? file: audioStream)
+        let audio = await readAudioFrom(file ? (file as Blob): ( audioStream as Blob))
         const model_name = `openai/whisper-tiny/.en`
 
-        worker.current.postMessage({
+        worker.current?.postMessage({
             type: MessageTypes.INFERENCE_REQUEST,
             audio,
             model_name
