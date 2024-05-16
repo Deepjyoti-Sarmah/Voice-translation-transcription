@@ -8,9 +8,20 @@ class MyTranscriptionPipeline {
 
     static async getInstance(progress_callback: ((data: ProgressEvent) => void) | null = null) {
         if(this.instance === null) {
-            this.instance = await pipeline(this.task, null, {
-                progress_callback
-            })
+            const wrappedProgressCallback = progress_callback 
+                ? (progress: number) => {
+                    const event = new ProgressEvent("progress", {
+                        lengthComputable: true,
+                        loaded: progress,
+                        total: 100,
+                    });
+                    progress_callback(event);
+                }
+                : undefined;
+
+            this.instance = await pipeline(this.task, this.model, {
+                progress_callback: wrappedProgressCallback,
+            }) as AutomaticSpeechRecognitionPipeline;
             return this.instance;
         }
     }
@@ -29,7 +40,7 @@ async function transcribe(audio: ArrayBuffer) {
     let pipeline: AutomaticSpeechRecognitionPipeline | null = null;
 
     try {
-        pipeline = await MyTranscriptionPipeline.getInstance(load_model_callback)
+        pipeline = await MyTranscriptionPipeline.getInstance(load_model_callback) || null;
     } catch (err: any) {
         console.log(err.message);
     }
@@ -38,18 +49,21 @@ async function transcribe(audio: ArrayBuffer) {
 
     if (pipeline) {
         const stride_length_s = 5;
+        const audioData = new Float32Array(audio);
 
         const generationTracker = new GenerationTracker(pipeline, stride_length_s);
-        await pipeline(audio, {
+        await pipeline(audioData, {
             top_k: 0,
             do_sample: false,
-            chunk_length: 30,
+            chunk_length_s:30,
             stride_length_s,
             return_timestamps: true,
             callback_function: generationTracker.callbackFunction.bind(generationTracker),
             chunk_callback: generationTracker.chunkCallback.bind(generationTracker)
         });
         generationTracker.sendFinalResult();
+    } else {
+        console.log("Failed to initialize the pipeline");
     }
 }
 
@@ -175,6 +189,4 @@ function createPartialResultMessage(result: any) {
         result
     })
 }
-
-
 
