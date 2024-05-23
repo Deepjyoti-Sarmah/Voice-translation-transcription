@@ -33,7 +33,7 @@ export default function Home() {
         let workerInstance: Worker | null = null;
 
         if (!worker.current) {
-            worker.current = new Worker(new URL("../utils/wisper.worker.ts", import.meta.url), {
+            worker.current = new Worker(new URL("../utils/whisper.worker.ts", import.meta.url), {
                 type: "module"
             });
             worker.current = workerInstance;
@@ -103,7 +103,7 @@ export default function Home() {
                 ): loading? (
                         <Transcribing />
                     ): isAudioAvailable? (
-                            <FileDisplay handleFormSubmission={handleFormSubmission} file={file} audioStream={audioStream} handleAudioReset={handleAudioReset} />
+                            <FileDisplay /* handleFormSubmission={handleFormSubmission}  */file={file} audioStream={audioStream} handleAudioReset={handleAudioReset} />
                         ): (
                                 <Homepage setFile={setFile} setAudioStream={setAudioStream} />
                             ) }
