@@ -109,7 +109,14 @@ const Information = ({output}: any) => {
                 {tab === "transcription" ? (
                     <Transcription textElement={textElement} / >
                 ): (
-                        <Translation />
+                        <Translation
+                            toLanguage={toLanguage}
+                            translating={translating}
+                            textElement={textElement}
+                            setTranslating={setTranslating}
+                            setTranslation={setToLanguage}
+                            generateTranslation={generateTranslation}
+                        />
                     )}
 
             </div>
