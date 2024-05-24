@@ -23,10 +23,6 @@ export default function Home() {
         setAudioStream(null);
     }
 
-    // useEffect(() => {
-    //     console.log("audioStream",audioStream);
-    // }, [audioStream]);
-    //
     const worker = useRef<Worker | null>(null);
     
     useEffect(() => {
@@ -73,7 +69,7 @@ export default function Home() {
     },[]);
 
     async function readAudioFrom(file:Blob) {
-        const samplingRate = 1600;
+        const samplingRate = 16000;
         const audioContext = new AudioContext({sampleRate: samplingRate});
         const response = await file.arrayBuffer()
         const decoded = await audioContext.decodeAudioData(response);
@@ -103,7 +99,7 @@ export default function Home() {
                 ): loading? (
                         <Transcribing />
                     ): isAudioAvailable? (
-                            <FileDisplay /* handleFormSubmission={handleFormSubmission}  */file={file} audioStream={audioStream} handleAudioReset={handleAudioReset} />
+                            <FileDisplay handleFormSubmission={handleFormSubmission} file={file} audioStream={audioStream} handleAudioReset={handleAudioReset} />
                         ): (
                                 <Homepage setFile={setFile} setAudioStream={setAudioStream} />
                             ) }
