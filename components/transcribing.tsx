@@ -8,7 +8,9 @@ const Transcribing = ({downloading}: any) => {
                 <h1 className='font-semibold text-4xl sm:text-5xl md:text-6xl'> 
                     <span className='text-blue-500 bold'> Transcribing </span>
                 </h1>
-                <p>{!downloading ? "warming up cylinders": "core cylinders engaged"}</p>
+                <p>
+                    {!downloading ? "warming up cylinders": "core cylinders engaged"}
+                </p>
             </div>
             <div className='flex flex-col gap-2 sm:gap-4 max-w-[500px] mx-auto w-full'>
                 {[0,1,2].map(val => {
@@ -19,7 +21,6 @@ const Transcribing = ({downloading}: any) => {
                         ></div>
                     );
                 })}
-
             </div>
         </div>
     )

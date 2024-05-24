@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Transcription = () => {
+const Transcription = ({textElement}: any) => {
   return (
-    <div>transcription</div>
+    <div>{textElement}</div>
   )
 }
 
