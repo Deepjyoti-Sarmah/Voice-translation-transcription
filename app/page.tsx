@@ -48,7 +48,7 @@ export default function Home() {
                     break;
                 case "RESULT":
                     setOutput(e.data.results)
-                    console.log(e.data.results)
+                    console.log("result",e.data.results)
                     break;
                 case "INFERENCE_DONE":
                     setFinished(true);
@@ -91,7 +91,7 @@ export default function Home() {
             <section className="min-h-screen flex flex-col">
                 <Header />
                 { output ? (
-                    <Information output={output}/>
+                    <Information output={output} finished={finished}/>
                 ): loading ? (
                         <Transcribing />
                     ): isAudioAvailable ? (

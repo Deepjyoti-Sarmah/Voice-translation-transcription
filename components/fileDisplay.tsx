@@ -4,8 +4,8 @@ import { Button } from './ui/button'
 interface FileDisplayProps {
     file: any;
     audioStream: any;
-    handleAudioReset: () => void;
-    handleFormSubmission: () => void;
+    handleAudioReset: () => any;
+    handleFormSubmission: () => any;
 }
 
 const FileDisplay = ({handleFormSubmission, file, audioStream, handleAudioReset}: FileDisplayProps) => {
