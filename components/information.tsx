@@ -99,8 +99,8 @@ const Information = ({output, finished}: any) => {
             </div>
             <div className='my-8 flex flex-col-reverse max-w-prose w-full mx-auto gap-4'>
                 {(!finished || translating) && (
-                    <div className='grid place-items-center'>
-                        <LoadingSVG />
+                    <div className='grid place-items-center'> 
+                        {/* <LoadingSVG /> */}
                     </div>
                 )}
                 {tab === "transcription" ? (
@@ -111,7 +111,7 @@ const Information = ({output, finished}: any) => {
                             translating={translating}
                             textElement={textElement}
                             setTranslating={setTranslating}
-                            setTranslation={setToLanguage}
+                            setToLanguage={setToLanguage}
                             generateTranslation={generateTranslation}
                         />
                     )}
