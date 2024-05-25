@@ -28,7 +28,7 @@ const Translation = ({textElement, toLanguage, translating, setToLanguage, gener
                         <Button
                             onClick={generateTranslation}
                             variant="outline"
-                            className='specialBtn px-3 py-2 rounded-lg'
+                            className='specialBtn px-3 py-2 rounded-lg hover:text-blue-600 duration-200'
                         >Translate</Button>
                     </div>
                 </div>

@@ -118,9 +118,38 @@ const Information = ({output}: any) => {
                             generateTranslation={generateTranslation}
                         />
                     )}
-
+            </div>
+            <div className='flex items-center gap-4 mx-auto'>
+                <Button
+                    onClick={handleCopy}
+                    variant="outline"
+                    title='copy'
+                    className='bg-white hover:text-blue-500 duration-200 px-2 aspect-square grid place-items-center rounded'
+                >
+                    <CopySVG/>
+                </Button>
+                <Button 
+                    onClick={handleDownload}
+                    variant="outline"
+                    title='download'
+                    className='bg-white hover:text-blue-500 duration-200 px-2 aspect-square grid place-items-center rounded'
+                >
+                    <DownloadSVG/>
+                </Button>
             </div>
         </main>
+    )
+}
+
+function CopySVG() {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+    )
+}
+
+function DownloadSVG() {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
     )
 }
 
