@@ -44,12 +44,11 @@ const Information = ({output, finished}: any) => {
 
         worker.current.addEventListener("message", onMessageReceived)
 
-        return () => {
-            worker.current.removeEventListener("message", onMessageReceived)
-        }
+        return () => worker.current.removeEventListener("message", onMessageReceived)
+        
     },[]);
 
-    const textElement = tab === "transcription" ? output.map((val: any) => val.text) : translation || ""
+    const textElement = tab === "transcription" ? output.map((val: any) => val.text) : translation ?? ""
 
     function handleCopy() {
         navigator.clipboard.writeText(textElement)
@@ -61,7 +60,7 @@ const Information = ({output, finished}: any) => {
         element.href = URL.createObjectURL(file);
         element.download = `Freescribe_${new Date().toString()}.txt`;
         document.body.appendChild(element);
-        element.click()
+        element.click();
     }
 
     function generateTranslation() {
@@ -78,69 +77,96 @@ const Information = ({output, finished}: any) => {
     }
 
     return (
-        <main 
-            className="flex-1  p-4 flex flex-col gap-3 text-center sm:gap-4 justify-center pb-20 max-w-prose w-full mx-auto">
-            <h1 className='font-semibold text-4xl sm:text-5xl md:text-6xl whitespace-nowrap'> Your 
-                <span className='text-blue-500 bold'> Transcription </span>
+        <main className="flex-1  p-4 flex flex-col gap-3 text-center sm:gap-4 justify-center pb-20 max-w-prose w-full mx-auto">
+            <h1 className="font-semibold text-4xl sm:text-5xl md:text-6xl whitespace-nowrap">
+                Your <span className="text-blue-500 bold">Transcription</span>
             </h1>
-            <div className='grid grid-cols-2 sm:mx-auto bg-white  rounded-lg overflow-hidden items-center p-1 blueShadow border-[2px] border-solid border-blue-300 gap-2'>
-                <Button 
+
+            <div className="grid grid-cols-2 sm:mx-auto bg-white rounded-lg overflow-hidden items-center p-2 blueShadow border-[2px] border-solid border-blue-300 gap-2">
+                <Button
                     onClick={() => setTab("transcription")}
                     variant="outline"
-                    className={'px-4 rounded duration-200 py-1 ' + 
-                        (tab === 'transcription' ? ' bg-blue-400 text-white' : ' text-blue-500 hover:text-blue-600')}
-                >Transcription</Button>
-                <Button 
+                    className={
+                        "px-4 rounded duration-200 py-1 " +
+                            (tab === "transcription"
+                                ? " bg-blue-500 text-white"
+                                : " text-blue-400 hover:text-blue-600")
+                    }
+                >
+                    Transcription
+                </Button>
+                <Button
                     onClick={() => setTab("translation")}
                     variant="outline"
-                    className={'px-4 rounded duration-200 py-1  ' + 
-                        (tab === 'translation' ? ' bg-blue-400 text-white' : ' text-blue-500 hover:text-blue-600')}
-                >Translation</Button>
+                    className={
+                        "px-4 rounded duration-200 py-1  " +
+                            (tab === "translation"
+                                ? " bg-blue-500 text-white"
+                                : " text-blue-400 hover:text-blue-600")
+                    }
+                >
+                    Translation
+                </Button>
             </div>
-            <div className='my-8 flex flex-col-reverse max-w-prose w-full mx-auto gap-4'>
+            <div className="my-8 flex flex-col-reverse max-w-prose w-full mx-auto gap-4">
                 {(!finished || translating) && (
-                    <div className='grid place-items-center'> 
-                        {/* <LoadingSVG /> */}
+                    <div className="grid place-items-center">
+                        <LoadingSpinnerSVG />
                     </div>
                 )}
                 {tab === "transcription" ? (
-                    <Transcription textElement={textElement} / >
-                ): (
+                    <Transcription textElement={textElement} />
+                ) : (
                         <Translation
                             toLanguage={toLanguage}
                             translating={translating}
                             textElement={textElement}
                             setTranslating={setTranslating}
+                            setTranslation={setTranslation}
                             setToLanguage={setToLanguage}
                             generateTranslation={generateTranslation}
                         />
                     )}
             </div>
-            <div className='flex items-center gap-4 mx-auto'>
+            <div className="flex items-center gap-4 mx-auto">
                 <Button
                     onClick={handleCopy}
                     variant="outline"
-                    title='copy'
-                    className='bg-white hover:text-blue-500 duration-200 px-2 aspect-square grid place-items-center rounded'
+                    title="Copy"
+                    className="bg-white  hover:text-blue-600 duration-200 text-blue-400 px-2 aspect-square grid place-items-center rounded"
                 >
-                    <CopySVG/>
+                    <CopySVG />
                 </Button>
-                <Button 
+                <Button
                     onClick={handleDownload}
                     variant="outline"
-                    title='download'
-                    className='bg-white hover:text-blue-500 duration-200 px-2 aspect-square grid place-items-center rounded'
+                    title="Download"
+                    className="bg-white  hover:text-blue-600 duration-200 text-blue-400 px-2 aspect-square grid place-items-center rounded"
                 >
-                    <DownloadSVG/>
+                    <DownloadSVG />
                 </Button>
             </div>
         </main>
     )
 }
 
-function LoadingSVG() {
+function LoadingSpinnerSVG() {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>
+        <svg 
+            // fill="white" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path 
+                d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" 
+                opacity=".25"
+            />
+            <path 
+                d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z" 
+                className="spinner_ajPY"
+            /></svg>
     )
 }
 
@@ -157,3 +183,70 @@ function DownloadSVG() {
 }
 
 export default Information
+
+        {/* <main  */}
+        {/*     className="flex-1  p-4 flex flex-col gap-3 text-center sm:gap-4 justify-center pb-20 max-w-prose w-full mx-auto"> */}
+        {/*     <h1 className='font-semibold text-4xl sm:text-5xl md:text-6xl whitespace-nowrap'> Your  */}
+        {/*         <span className='text-blue-500 bold'> Transcription </span> */}
+        {/*     </h1> */}
+        {/*     <div className='grid grid-cols-2 sm:mx-auto bg-white  rounded-lg overflow-hidden items-center p-1 blueShadow border-[2px] border-solid border-blue-300 gap-2'> */}
+        {/*         <Button  */}
+        {/*             onClick={() => setTab("transcription")} */}
+        {/*             variant="outline" */}
+        {/*             className={ */}
+        {/*                 'px-4 rounded duration-200 py-1 ' +  */}
+        {/*                 (tab === 'transcription' ? ' bg-blue-400 text-white' : ' text-blue-500 hover:text-blue-600') */}
+        {/*             } */}
+        {/*         > */}
+        {/*             Transcription */}
+        {/*         </Button> */}
+        {/*         <Button  */}
+        {/*             onClick={() => setTab("translation")} */}
+        {/*             variant="outline" */}
+        {/*             className={ */}
+        {/*                 'px-4 rounded duration-200 py-1  ' +  */}
+        {/*                 (tab === 'translation' ? ' bg-blue-400 text-white' : ' text-blue-500 hover:text-blue-600') */}
+        {/*             } */}
+        {/*         > */}
+        {/*             Translation */}
+        {/*         </Button> */}
+        {/*     </div> */}
+        {/*     <div className='my-8 flex flex-col-reverse max-w-prose w-full mx-auto gap-4'> */}
+        {/*         {(!finished || translating) && ( */}
+        {/*             <div className='grid place-items-center'>  */}
+        {/*                 <LoadingSpinnerSVG /> */}
+        {/*             </div> */}
+        {/*         )} */}
+        {/*         {tab === "transcription" ? ( */}
+        {/*             <Transcription textElement={textElement} / > */}
+        {/*         ): ( */}
+        {/*                 <Translation */}
+        {/*                     toLanguage={toLanguage} */}
+        {/*                     translating={translating} */}
+        {/*                     textElement={textElement} */}
+        {/*                     setTranslating={setTranslating} */}
+        {/*                     setTranslation={setTranslation} */}
+        {/*                     setToLanguage={setToLanguage} */}
+        {/*                     generateTranslation={generateTranslation} */}
+        {/*                 /> */}
+        {/*             )} */}
+        {/*     </div> */}
+        {/*     <div className='flex items-center gap-4 mx-auto'> */}
+        {/*         <Button */}
+        {/*             onClick={handleCopy} */}
+        {/*             variant="outline" */}
+        {/*             title='copy' */}
+        {/*             className='bg-white hover:text-blue-500 duration-200 px-2 aspect-square grid place-items-center rounded' */}
+        {/*         > */}
+        {/*             <CopySVG/> */}
+        {/*         </Button> */}
+        {/*         <Button  */}
+        {/*             onClick={handleDownload} */}
+        {/*             variant="outline" */}
+        {/*             title='download' */}
+        {/*             className='bg-white hover:text-blue-500 duration-200 px-2 aspect-square grid place-items-center rounded' */}
+        {/*         > */}
+        {/*             <DownloadSVG/> */}
+        {/*         </Button> */}
+        {/*     </div> */}
+        {/* </main> */}
