@@ -37,4 +37,7 @@ const Translation = ({textElement, toLanguage, translating, setToLanguage, gener
     )
 }
 
+
+// হয়তো তেওঁ পাৰ্টীখনলৈ উভতি আহি তেওঁক লৈ গ'ল আৰু শেষত তেওঁৰ হৃদয়েও অব্যাহত ৰাখিলে।
+
 export default Translation

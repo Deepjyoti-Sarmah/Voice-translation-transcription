@@ -71,7 +71,7 @@ function sendLoadingMessage(status: any) {
     });
 }
 
-async function sendDownloadingMessage(
+export async function sendDownloadingMessage(
     file: any,
     progress: any,
     loaded: any,

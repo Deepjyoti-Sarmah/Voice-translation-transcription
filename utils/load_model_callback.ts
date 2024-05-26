@@ -1,6 +1,6 @@
-import { sendDownloadingMessage } from "./wisper.worker";
+import { sendDownloadingMessage } from "./whisper.worker";
 
-export async function load_model_callback(data: ProgressEvent) {
+export async function  oad_model_callback(data: any) {
   const { status } = data;
   if (status === "progress") {
     const { file, progress, loading, total } = data;
