@@ -59,10 +59,9 @@ export default function Home() {
 
         worker.current.addEventListener("message", onMessageReceived);
 
-        return () => { 
-            worker.current.removeEventListener("message", onMessageReceived); 
-        }
-    },[]);
+        return () => worker.current.removeEventListener("message", onMessageReceived); 
+        
+    });
 
     async function readAudioFrom(file:any) {
         const samplingRate = 16000;
