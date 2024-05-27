@@ -103,7 +103,7 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
                     <input
                         className='hidden'
                         type='file'
-                        // accept='.mp3,.wave'
+                        accept='.mp3,.wave'
                         onChange={(e) => {
                             if (e.target.files) {
                                 const tempFile = e.target.files[0]
