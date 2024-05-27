@@ -46,7 +46,7 @@ const Information = ({output, finished}: any) => {
 
         return () => worker.current.removeEventListener("message", onMessageReceived)
         
-    },[]);
+    });
 
     const textElement = tab === "transcription" ? output.map((val: any) => val.text) : translation ?? ""
 
