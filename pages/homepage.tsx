@@ -18,7 +18,7 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
 
     async function startRecording() {
         let tempStream: MediaStream | undefined;
-        console.log(`Start Recording`);
+        // console.log(`Start Recording`);
 
         try {
             const streamData = await navigator.mediaDevices.getUserMedia({
@@ -27,7 +27,7 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
             });
             tempStream = streamData;
         } catch (err: any) {
-            console.log(err.message);
+            // console.log(err.message);
             return;
         }
         setRecordingStatus("recording");
@@ -49,7 +49,7 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
 
     async function stopRecording() {
         setRecordingStatus("inactive");
-        console.log("Stop Recording");
+        // console.log("Stop Recording");
 
         if (mediaRecoder.current) {
             mediaRecoder.current.stop();
@@ -76,7 +76,7 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
         <main
             className="flex-1 p-4 flex flex-col gap-3 sm:gap-4 md:gap-5 justify-center text-center pb-10"
         >
-            <h1 className='font-semibold text-5xl sm:text-6xl md:text-7xl'> Free
+            <h1 className='font-semibold text-5xl sm:text-6xl md:text-7xl'> Record
                 <span className='text-blue-500 bold'>
                     Scribe
                 </span>
@@ -113,7 +113,7 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
                     />
                 </label> a mp3 file
             </p>
-            <p className='italic text-slate-400'>Free now free forever</p>
+            <p className='italic text-slate-400'>A web based audio transcoder</p>
         </main>
     )
 }

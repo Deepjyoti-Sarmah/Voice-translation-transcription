@@ -9,7 +9,7 @@ const Transcribing = ({downloading}: any) => {
                     <span className='text-blue-500 bold'> Transcribing </span>
                 </h1>
                 <p>
-                    {!downloading ? "warming up cylinders": "core cylinders engaged"}
+                    {!downloading ? "warming up the worker": "core worker engaged"}
                 </p>
             </div>
             <div className='flex flex-col gap-2 sm:gap-4 max-w-[500px] mx-auto w-full'>

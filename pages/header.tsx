@@ -5,7 +5,7 @@ const Header = () => {
     return (
         <header className="flex items-center justify-between gap-4 p-4">
             <a href="/">
-                <h1 className='font-bold'> Free
+                <h1 className='font-bold'> Record
                     <span className="text-blue-500 bold">Scribe</span>
                 </h1>
             </a>

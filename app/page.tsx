@@ -40,19 +40,19 @@ export default function Home() {
             switch (e.data.type) {
                 case "DOWNLOADING":
                     setDownloading(true);
-                    console.log("DOWNLOADING");
+                    // console.log("DOWNLOADING");
                     break;
                 case "LOADING":
                     setLoading(true);
-                    console.log("LOADING");
+                    // console.log("LOADING");
                     break;
                 case "RESULT":
                     setOutput(e.data.results)
-                    console.log("result", e.data.results)
+                    // console.log("result", e.data.results)
                     break;
                 case "INFERENCE_DONE":
                     setFinished(true);
-                    console.log("DONE");
+                    // console.log("DONE");
                     break;
             }
         }

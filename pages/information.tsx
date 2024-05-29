@@ -26,10 +26,10 @@ const Information = ({ output, finished }: any) => {
         const onMessageReceived = async (e: any) => {
             switch (e.data.status) {
                 case "initiate":
-                    console.log("DOWNLOADING")
+                    // console.log("DOWNLOADING")
                     break
                 case "progress":
-                    console.log("LOADING")
+                    // console.log("LOADING")
                     break
                 case "update":
                     setTranslation(e.data.output)
@@ -37,7 +37,7 @@ const Information = ({ output, finished }: any) => {
                     break
                 case "complete":
                     setTranslating(false)
-                    console.log("DONE")
+                    // console.log("DONE")
                     break
             }
         }
@@ -60,7 +60,7 @@ const Information = ({ output, finished }: any) => {
         const element = document.createElement("a")
         const file = new Blob([textElement], { type: "text/plain" })
         element.href = URL.createObjectURL(file)
-        element.download = `Freescribe_${new Date().toString()}.txt`
+        element.download = `Recordscribe_${new Date().toString()}.txt`
         document.body.appendChild(element)
         element.click()
     }
@@ -85,7 +85,7 @@ const Information = ({ output, finished }: any) => {
                 Your <span className="text-blue-500 bold">Transcription</span>
             </h1>
 
-            <div className="grid grid-cols-2 sm:mx-auto bg-white rounded-lg overflow-hidden items-center p-2 blueShadow border-[2px] border-solid border-blue-300 gap-2">
+            <div className="grid grid-cols-2 sm:mx-auto bg-white rounded-xl overflow-hidden items-center p-2 blueShadow  gap-2">
                 <Button
                     onClick={() => setTab("transcription")}
                     variant="outline"
