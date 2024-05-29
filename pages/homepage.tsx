@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button } from './ui/button'
+import { Button } from '../components/ui/button'
 
 interface HomepageProps {
     setAudioStream: (stream: Blob | null) => void;
@@ -90,12 +90,12 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
                 className='flex text-black items-center text-base justify-between gap-4 mx-auto w-72 max-w-full my-4 specialBtn px-4 py-2 rounded-xl hover:text-blue-600 duration-200'
                 onClick={recordingStatus === "inactive" ? startRecording : stopRecording}
             >
-                <p>{recordingStatus === "inactive"? "Record" : "Stop Recording"}</p>
+                <p>{recordingStatus === "inactive" ? "Record" : "Stop Recording"}</p>
                 <div className='flex items-center gap-2'>
                     {duration !== 0 && (
                         <p className='text-sm'>{duration}s</p>
                     )}
-                    <RecordSVG recordingStatus={recordingStatus}/>
+                    <RecordSVG recordingStatus={recordingStatus} />
                 </div>
             </Button>
             <p className='text-base'>Or
@@ -120,18 +120,18 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
 
 type RecordingStatus = "inactive" | "recording";
 
-function RecordSVG({recordingStatus}: {recordingStatus:RecordingStatus}) {
+function RecordSVG({ recordingStatus }: { recordingStatus: RecordingStatus }) {
     const stockeColor = recordingStatus === "inactive" ? "#3b82f6" : "#f6423b"
     return (
-        <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            width="24" 
-            height="24" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke= {stockeColor}
-            stroke-width="2" 
-            stroke-linecap="round" 
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke={stockeColor}
+            stroke-width="2"
+            stroke-linecap="round"
             stroke-linejoin="round"
         >
             <path d="M12 2c-1.7 0-3 1.2-3 2.6v6.8c0 1.4 1.3 2.6 3 2.6s3-1.2 3-2.6V4.6C15 3.2 13.7 2 12 2z" />

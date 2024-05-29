@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button } from './ui/button'
+import { Button } from '../components/ui/button'
 import Transcription from './transcription';
 import Translation from './translation';
 
-const Information = ({output, finished}: any) => {
+const Information = ({ output, finished }: any) => {
 
     const [tab, setTab] = useState("transcription")
     const [translation, setTranslation] = useState(null)
@@ -91,9 +91,9 @@ const Information = ({output, finished}: any) => {
                     variant="outline"
                     className={
                         "px-4 rounded duration-200 py-1 " +
-                            (tab === "transcription"
-                                ? " bg-blue-500 text-white"
-                                : " text-blue-400 hover:text-blue-600")
+                        (tab === "transcription"
+                            ? " bg-blue-500 text-white"
+                            : " text-blue-400 hover:text-blue-600")
                     }
                 >
                     Transcription
@@ -103,9 +103,9 @@ const Information = ({output, finished}: any) => {
                     variant="outline"
                     className={
                         "px-4 rounded duration-200 py-1  " +
-                            (tab === "translation"
-                                ? " bg-blue-500 text-white"
-                                : " text-blue-400 hover:text-blue-600")
+                        (tab === "translation"
+                            ? " bg-blue-500 text-white"
+                            : " text-blue-400 hover:text-blue-600")
                     }
                 >
                     Translation
@@ -114,9 +114,9 @@ const Information = ({output, finished}: any) => {
             <div className="my-8 flex flex-col-reverse max-w-prose w-full mx-auto gap-4">
                 {(!finished || translating) && (
                     <div className='flex flex-col gap-2 sm:gap-4 max-w-[500px] mx-auto w-full'>
-                        {[0,1,2].map(val => {
+                        {[0, 1, 2].map(val => {
                             return (
-                                <div 
+                                <div
                                     key={val}
                                     className={'rounded-full h-2 sm:h-3 bg-slate-400 loading ' + `loading${val}`}
                                 ></div>
@@ -127,16 +127,16 @@ const Information = ({output, finished}: any) => {
                 {tab === "transcription" ? (
                     <Transcription textElement={textElement} />
                 ) : (
-                        <Translation
-                            toLanguage={toLanguage}
-                            translating={translating}
-                            textElement={textElement}
-                            setTranslating={setTranslating}
-                            setTranslation={setTranslation}
-                            setToLanguage={setToLanguage}
-                            generateTranslation={generateTranslation}
-                        />
-                    )}
+                    <Translation
+                        toLanguage={toLanguage}
+                        translating={translating}
+                        textElement={textElement}
+                        setTranslating={setTranslating}
+                        setTranslation={setTranslation}
+                        setToLanguage={setToLanguage}
+                        generateTranslation={generateTranslation}
+                    />
+                )}
             </div>
             <div className="flex items-center gap-4 mx-auto">
                 <Button
@@ -168,7 +168,7 @@ function CopySVG() {
 
 function DownloadSVG() {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5" /></svg>
     )
 }
 

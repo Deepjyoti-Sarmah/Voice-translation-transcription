@@ -1,8 +1,8 @@
 import { LANGUAGES } from '@/utils/presets'
 import React from 'react'
-import { Button } from './ui/button'
+import { Button } from '../components/ui/button'
 
-const Translation = ({textElement, toLanguage, translating, setToLanguage, generateTranslation}: any) => {
+const Translation = ({ textElement, toLanguage, translating, setToLanguage, generateTranslation }: any) => {
     return (
         <>
             {textElement && !translating && <p>{textElement}</p>}
@@ -18,7 +18,7 @@ const Translation = ({textElement, toLanguage, translating, setToLanguage, gener
                             onChange={(e) => setToLanguage(e.target.value)}
                         >
                             <option value={"Select language"}>Select language</option>
-                            { Object.entries(LANGUAGES).map(([key, value]) => {
+                            {Object.entries(LANGUAGES).map(([key, value]) => {
                                 return (
                                     <option key={key} value={value}>{key}</option>
                                 )
