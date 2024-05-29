@@ -41,7 +41,6 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
         mediaRecoder.current.ondataavailable = (event: BlobEvent) => {
             if (typeof event.data === "undefined") return;
             if (event.data.size === 0) return;
-
             localAudioChunks.push(event.data);
         };
         setAudioChunks(localAudioChunks);
@@ -50,7 +49,6 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
     async function stopRecording() {
         setRecordingStatus("inactive");
         // console.log("Stop Recording");
-
         if (mediaRecoder.current) {
             mediaRecoder.current.stop();
             mediaRecoder.current.onstop = () => {
@@ -64,11 +62,9 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
 
     useEffect(() => {
         if (recordingStatus === "inactive") return;
-
         const interval = setInterval(() => {
             setDuration(curr => curr + 1);
         }, 1000);
-
         return () => clearInterval(interval);
     })
 
