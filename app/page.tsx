@@ -92,17 +92,17 @@ export default function Home() {
                 {output ? (
                     <Information output={output} finished={finished} />
                 ) : loading ? (
-                    <Transcribing />
-                ) : isAudioAvailable ? (
-                    <FileDisplay
-                        handleFormSubmission={handleFormSubmission}
-                        file={file}
-                        audioStream={audioStream}
-                        handleAudioReset={handleAudioReset}
-                    />
-                ) : (
-                    <Homepage setFile={setFile} setAudioStream={setAudioStream} />
-                )}
+                        <Transcribing />
+                    ) : isAudioAvailable ? (
+                            <FileDisplay
+                                handleFormSubmission={handleFormSubmission}
+                                file={file}
+                                audioStream={audioStream}
+                                handleAudioReset={handleAudioReset}
+                            />
+                        ) : (
+                                <Homepage setFile={setFile} setAudioStream={setAudioStream} />
+                            )}
             </section>
             <footer></footer>
         </div>

@@ -4,15 +4,20 @@ import { Button } from '../components/ui/button';
 const Header = () => {
     return (
         <header className="flex items-center justify-between gap-4 p-4">
-            <h1 className='font-medium'> Free
-                <span className="text-blue-500 bold">Scribe</span>
-            </h1>
-            <Button
-                variant="outline"
-                className="flex text-black text-sm items-center gap-2 px-4 py-2 rounded-lg specialBtn hover:text-blue-600 duration-200">
-                <p>New</p>
-                <PlusSVG />
-            </Button>
+            <a href="/">
+                <h1 className='font-bold'> Free
+                    <span className="text-blue-500 bold">Scribe</span>
+                </h1>
+            </a>
+
+            <a href="/">
+                <Button
+                    variant="outline"
+                    className="flex text-black text-sm items-center gap-2 px-4 py-2 rounded-lg specialBtn hover:text-blue-600 duration-200">
+                    <p>New</p>
+                    <PlusSVG />
+                </Button>
+            </a>
         </header>
     )
 };
