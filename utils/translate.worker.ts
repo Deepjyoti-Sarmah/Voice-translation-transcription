@@ -1,5 +1,5 @@
 import { pipeline, env } from "@xenova/transformers"
-// env.allowLocalModels = false;
+env.allowLocalModels = false;
 
 class MyTranslationPipeline {
     static task: any = "translation"
