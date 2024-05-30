@@ -66,14 +66,14 @@ const Information = ({ output, finished }: any) => {
     }
 
     function generateTranslation() {
-        if (translating || toLanguage === "Select language") {
+        if (translating || toLanguage === "Select language" || !output) {
             return
         }
 
         setTranslating(true)
 
         worker.current.postMessage({
-            text: output.map((val: any) => val.text),
+            text: output.filter(Boolean).map((val: any) => val.text),
             src_lang: "eng_Latn",
             tgt_lang: toLanguage,
         })
@@ -124,19 +124,21 @@ const Information = ({ output, finished }: any) => {
                         })}
                     </div>
                 )}
-                {tab === "transcription" ? (
-                    <Transcription textElement={textElement} />
-                ) : (
-                    <Translation
-                        toLanguage={toLanguage}
-                        translating={translating}
-                        textElement={textElement}
-                        setTranslating={setTranslating}
-                        setTranslation={setTranslation}
-                        setToLanguage={setToLanguage}
-                        generateTranslation={generateTranslation}
-                    />
-                )}
+                {output ? (
+                    tab === "transcription" ? (
+                        <Transcription textElement={textElement} />
+                    ) : (
+                            <Translation
+                                toLanguage={toLanguage}
+                                translating={translating}
+                                textElement={textElement}
+                                setTranslating={setTranslating}
+                                setTranslation={setTranslation}
+                                setToLanguage={setToLanguage}
+                                generateTranslation={generateTranslation}
+                            />
+                        )
+                ): null}
             </div>
             <div className="flex items-center gap-4 mx-auto">
                 <Button
