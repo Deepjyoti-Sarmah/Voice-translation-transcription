@@ -94,8 +94,10 @@ const Homepage = ({ setFile, setAudioStream }: HomepageProps) => {
                     <RecordSVG recordingStatus={recordingStatus} />
                 </div>
             </Button>
-            <p className='text-base'>Or
-                <label className='text-blue-500 cursor-pointer hover:text-blue-700 duration-200'> upload
+            <p className='text-base flex flex-row text-center items-center justify-center gap-2'>Or
+                <label className='text-blue-500 cursor-pointer hover:text-blue-700 duration-200 flex flex-row gap-1'>
+                    <span><FileSVG/></span>
+                    upload
                     <input
                         className='hidden'
                         type='file'
@@ -134,6 +136,12 @@ function RecordSVG({ recordingStatus }: { recordingStatus: RecordingStatus }) {
             <path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18.4v3.3M8 22h8" />
         </svg>
     );
+}
+
+function FileSVG() {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#609af7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.08V8l-6-6H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h6"/><path d="M14 3v5h5M18 21v-6M15 18h6"/></svg>
+    )
 }
 
 export default Homepage
