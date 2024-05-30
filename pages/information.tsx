@@ -49,8 +49,10 @@ const Information = ({ output, finished }: any) => {
 
     const textElement =
         tab === "transcription"
-            ? output.map((val: any) => val.text)
-            : translation ?? ""
+            ? output 
+                ? output.map((val: any) => val.text)
+                : [] 
+            : translation ?? "";
 
     function handleCopy() {
         navigator.clipboard.writeText(textElement)
