@@ -9,7 +9,7 @@ const Information = ({ output, finished }: any) => {
     const [translation, setTranslation] = useState(null)
     const [toLanguage, setToLanguage] = useState("Select language")
     const [translating, setTranslating] = useState(false)
-    console.log(output)
+    // console.log(output)
 
     const worker: any = useRef()
 
