@@ -15,10 +15,10 @@ const FileDisplay = ({ handleFormSubmission, file, audioStream, handleAudioReset
     useEffect(() => {
         if (!file && !audioStream) return
         if (file) {
-            console.log("Here File", file)
+            // console.log("Here File", file)
             audioRef.current.src = URL.createObjectURL(file)
         } else {
-            console.log("Here Audio", audioStream)
+            // console.log("Here Audio", audioStream)
             audioRef.current.src = URL.createObjectURL(audioStream)
         }
     }, [audioStream, file]);
